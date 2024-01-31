@@ -49,7 +49,10 @@ public class PlayerController : MonoBehaviour
     {
         //if player is on the ground, jump
         //if (isGrounded)
-        Jump();
+        if (isGrounded)
+        {
+            Jump();
+        }
     }
 
     private void Jump()
@@ -90,4 +93,34 @@ public class PlayerController : MonoBehaviour
     }
 
     // TODO: Week 3's assignment needs a couple of extra functions here...
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    private void OnCollisionStay(Collision collision)
+    { //if making contact with the ground
+        Vector3 norm = collision.GetContact(0).normal;
+        if (Vector3.Angle(norm, Vector3.up) < 45f)
+        {
+            isGrounded = true;
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+
 }
