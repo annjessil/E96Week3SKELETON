@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         Move(direction);
 
         // TODO: check conditions needed to flip player, and if so, flip player
-        if((isFacingRight && direction == -1) || (!isFacingRight && direction == 1))
+        if ((isFacingRight && direction == -1) || (!isFacingRight && direction == 1))
         {
             Flip();
         }
@@ -48,11 +48,9 @@ public class PlayerController : MonoBehaviour
     void OnJump()
     {
         //if player is on the ground, jump
-        //if (isGrounded)
         if (isGrounded)
-        {
             Jump();
-        }
+        
     }
 
     private void Jump()
@@ -79,7 +77,7 @@ public class PlayerController : MonoBehaviour
         // TODO: Here, we can handle animation transitioning logic
     }
 
- 
+
 
     private void Flip()
     {
@@ -97,30 +95,48 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 
-    private void OnCollisionStay(Collision collision)
-    { //if making contact with the ground
-        Vector3 norm = collision.GetContact(0).normal;
+
+
+    void OnCollisionStay(Collision collision)
+    {
+        // TODO: Check if we are in contact with the ground. If we are, note that we are grounded
+
+        Vector3 norm = collision.GetContact(0).normal; //gets orthogonal vector to the plane
         if (Vector3.Angle(norm, Vector3.up) < 45f)
         {
             isGrounded = true;
         }
 
+
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+
         }
 
     }
 
-    private void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
+        // TODO: When we leave the ground, we are no longer grounded
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+
         }
+
+
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (CompareTag("Collectables"))
+        {
+            Object.Destroy(gameObject);
+        }
+    }
 }
