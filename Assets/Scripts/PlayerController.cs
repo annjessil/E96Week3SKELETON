@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     // TODO: create variable to store rigidbody of player (2D)
     // TODO: create variable storing the Animator
     Rigidbody2D rb;
+    Animator anim;
 
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpHeight = 5f;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         // TODO: Get references to the rigidbody and animator attached to the current GameObject
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
     }
 
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour
     {
         // TODO: change x velocity of player
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
+
+        anim.SetBool("isRunning", x != 0);
 
         // TODO: Here, we can handle animation transitioning logic
     }
