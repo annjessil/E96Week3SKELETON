@@ -97,14 +97,14 @@ public class PlayerController : MonoBehaviour
     // TODO: Week 3's assignment needs a couple of extra functions here...
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
     }
 
 
 
-    void OnCollisionStay(Collision collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         // TODO: Check if we are in contact with the ground. If we are, note that we are grounded
 
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         // TODO: When we leave the ground, we are no longer grounded
         if (collision.gameObject.CompareTag("Ground"))
